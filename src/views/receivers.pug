@@ -1,0 +1,112 @@
+extends layout
+
+block content
+
+    table.table.table-bordered.table-striped.table-hover.col-12.col-md-6.col-lg-7(style={float:'left', margin:'10px'})
+        thead
+            tr
+                th Прізвище
+                th Ім'я
+                th По-батькові
+                th Email
+                th Видалити
+        tbody
+            each target, index in targets
+                tr
+                    td(id="tdSurname"+index)=target.surname
+                    td(id="tdName"+index)=target.name
+                    td(id="tdPatronymic"+index)=target.patronymic
+                    td(id="tdEmail"+index)=target.email
+                    td.text-center
+                        form(action="/delete_post", method="POST")
+                            button.btn.btn-danger.btn-block.btn-sm.deletePersonBtn(
+                                name="removeBtn"
+                                type='submit'
+                                id="removeBtn"+index
+                                ) Delete
+                        button.btn.btn-primary.btn-block.btn-sm.editPersonBtn(
+                        name="editBtn"
+                        type='button'
+                        value='edit'
+                        id="editBtn" + index
+                        )  Edit
+    .col-5.col-md-3.col-lg-2.text-left(style={float:'left', margin:'10px'})
+        form#addForm(
+        method='post'
+        action='/add_post'
+        )
+            .form-group.row
+                label(for="add-surname") Surname:
+                input.form-control(
+                type='text'
+                name='surname'
+                id='add-surname'
+                )
+
+            .form-group.row
+                label(for="add-name") Name:
+                input.form-control(
+                name='name'
+                id='add-name'
+                )
+
+            .form-group.row
+                label(for="add-patronymic") Patronymic:
+                input.form-control(
+                name='patronymic'
+                id='add-patronymic'
+                )
+
+
+            .form-group.row
+                label(for="add-email") Email:
+                input.form-control(
+                name='email'
+                type='email'
+                id='add-email'
+                )
+
+            .form-group.text-center
+                button.btn.btn-primary#addBtn(type='submit') Add
+
+    .col-5.col-md-3.col-lg-2.text-left(style={float:'left', margin:'10px'})
+        form#editForm(
+        method='post'
+        action='/edit_post'
+        )
+            .form-group.row
+                label(for="edit-surname") Surname:
+                input.form-control(
+                type='text'
+                name='surname'
+                id='edit-surname'
+                )
+
+            .form-group.row
+                label(for="edit-name") Name:
+                input.form-control(
+                name='name'
+                id='edit-name'
+                )
+
+            .form-group.row
+                label(for="edit-patronymic") Patronymic:
+                input.form-control(
+                name='patronymic'
+                id='edit-patronymic'
+                )
+
+
+            .form-group.row
+                label(for="edit-email") Email:
+                input.form-control(
+                name='email'
+                type='email'
+                id='edit-email'
+                )
+
+            .form-group.text-center
+                button.btn.btn-primary#saveBtn(type='submit' name='saveButton') Save
+    script(
+    src="/js/receiversPageJS.js"
+    )

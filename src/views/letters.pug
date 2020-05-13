@@ -1,0 +1,50 @@
+extends layout
+
+block content
+    .row(style={width:'70%'})
+        .col-12.col-md-6.col-lg-4.text-left(style='padding-left:30px')
+            each letter, index in letters
+                .form-check
+                    input.form-check-input.js-select-letter(
+                        type='radio'
+                        name="js-select-letter"
+                        id="js-select-letter-"+index
+                        data-subject=letter.subject
+                        data-text=letter.text
+                    )
+                    label.form-check-label(for="js-select-letter-"+index)= letter.subject
+
+            .form-check
+                input.form-check-input.js-select-letter(
+                    type='radio'
+                    name="js-select-letter"
+                    id="js-select-letter-custom"
+                    data-subject=""
+                    data-text=""
+                )
+                label.form-check-label(for="js-select-letter-custom") Dovilnii list
+        .col-12.col-md-6.col-lg-8
+            form(
+                method='post'
+                action='/letter-send'
+            )
+                .form-group
+                    label(for="letter-send-subject") Subject:
+                    input.form-control(
+                        type='text'
+                        name='subject'
+                        id='letter-send-subject'
+                    )
+
+                .form-group
+                    label(for="letter-send-text") Text:
+                    textarea.form-control(
+                        name='text'
+                        id='letter-send-text'
+                    )
+
+                .form-group.text-center
+                    button.btn.btn-primary(type='submit') Send
+    script(
+    src="/js/lettersPageJS.js"
+    )
